@@ -61,7 +61,6 @@ public class BookController {
         values.put("username", username);
         values.put("password", password);
         return new ModelAndView(new RedirectView("addBook"), values);
-
     }
 
 

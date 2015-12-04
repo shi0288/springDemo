@@ -17,6 +17,7 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.31'
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.7'
 
+
     //spring
     compile group: 'org.springframework', name: 'spring-beans', version: springVersion
     compile group: 'org.springframework', name: 'spring-core', version: springVersion
@@ -26,6 +27,12 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-context', version: springVersion
     compile group: 'org.springframework', name: 'spring-jdbc', version: springVersion
     compile group: 'org.springframework', name: 'spring-orm', version: springVersion
+    compile group: 'org.springframework', name: 'spring-context-support', version: springVersion
+
+
+    //quert ²»Ö§³Öquert2
+    compile group: 'org.quartz-scheduler', name: 'quartz', version: '1.8.5'
+
     compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.8.1'
 
     compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'

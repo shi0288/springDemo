@@ -76,6 +76,10 @@
     </aop:config>
 
 
+    <!--  aop注解 -->
+    <aop:aspectj-autoproxy/>
+
+
     <!--线程池 -->
     <!--corePoolSize： 线程池维护线程的最少数量-->
     <!--keepAliveSeconds  线程池维护线程所允许的空闲时间-->
@@ -112,13 +116,13 @@
     <!--</bean>-->
 
     <!-- 添加调度 -->
-    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="triggers">
-            <list>
-                <ref bean="cronTrigger" />
-            </list>
-        </property>
-        <property name="taskExecutor" ref="executor" />
-    </bean>
+    <!--<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">-->
+        <!--<property name="triggers">-->
+            <!--<list>-->
+                <!--<ref bean="cronTrigger" />-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--<property name="taskExecutor" ref="executor" />-->
+    <!--</bean>-->
 
     </beans>

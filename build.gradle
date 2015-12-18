@@ -29,6 +29,12 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-orm', version: springVersion
     compile group: 'org.springframework', name: 'spring-context-support', version: springVersion
 
+    compile group: 'org.springframework.security', name: 'spring-security-config', version: springVersion
+    compile group: 'org.springframework.security', name: 'spring-security-taglibs', version: springVersion
+
+    compile group: 'jstl', name: 'jstl', version: '1.1.2'
+    compile group: 'taglibs', name: 'standard', version: '1.1.2'
+
 
     //quert ²»Ö§³Öquert2
     compile group: 'org.quartz-scheduler', name: 'quartz', version: '1.8.5'

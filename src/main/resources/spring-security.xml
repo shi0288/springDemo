@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/security 
+			http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+    <!--  Spring-Security 的配置 -->
+    <!-- 注意开启use-expressions.表示开启表达式.
+    see:http://www.family168.com/tutorial/springsecurity3/html/el-access.html
+     -->
+    <security:http auto-config="true" use-expressions="true" access-denied-page="/auth/denied">
+
+          <!--
+          表达式	说明
+          hasRole([role])	返回 true 如果当前主体拥有特定角色。
+          hasAnyRole([role1,role2])	返回 true 如果当前主体拥有任何一个提供的角色 （使用逗号分隔的字符串队列）
+          principal	允许直接访问主体对象，表示当前用户
+          authentication	允许直接访问当前 Authentication对象 从SecurityContext中获得
+          permitAll	一直返回true
+          denyAll	一直返回false
+          isAnonymous()	如果用户是一个匿名登录的用户 就会返回 true
+          isRememberMe()	如果用户是通过remember-me 登录的用户 就会返回 true
+          isAuthenticated()	如果用户不是匿名用户就会返回true
+          isFullyAuthenticated()	如果用户不是通过匿名也不是通过remember-me登录的用户时， 就会返回true。
+          -->
+
+
+        <security:intercept-url pattern="/auth/login" access="permitAll"/>
+        <security:intercept-url pattern="/main/admin" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/main/common" access="hasRole('ROLE_USER')"/>
+
+        <security:form-login
+                login-page="/auth/login"
+                authentication-failure-url="/auth/login?error=true"
+                default-target-url="/main/common"/>
+
+        <security:logout
+                invalidate-session="true"
+                logout-success-url="/auth/login"
+                logout-url="/auth/logout"/>
+
+    </security:http>
+
+    <!-- 指定一个自定义的authentication-manager :customUserDetailsService -->
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="customUserDetailsService">
+            <security:password-encoder ref="passwordEncoder"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <!-- 对密码进行MD5编码 -->
+    <bean class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" id="passwordEncoder"/>
+
+    <!--
+        通过 customUserDetailsService,Spring会自动的用户的访问级别.
+        也可以理解成:以后我们和数据库操作就是通过customUserDetailsService来进行关联.
+     -->
+    <bean id="customUserDetailsService" class="com.mcp.myself.service.CustomUserDetailsService"/>
+
+</beans>
+
